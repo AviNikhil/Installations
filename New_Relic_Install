@@ -1,0 +1,16 @@
+java -javaagent:/home/nikhil/newrelic/newrelic.jar -jar 
+
+======================================================================================
+>>>Installation of NER RELIC Monitoring tool:
+
+step-1: create account, after creating CREATE ENVIRONMENT -LINUX.... to monitor system metric
+
+ps aux | grep newrelic
+
+systemctl stop newrelic-infra
+
+systemctl restart newrelic-infra
+
+systemctl start newrelic-infra
+
+
