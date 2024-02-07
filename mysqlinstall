@@ -1,0 +1,28 @@
+sudo apt update
+sudo apt upgrade
+sudo apt install mysql-server
+mysql --version
+sudo mysql_secure_installation
+
+>>>> to craete user and password and grand permissions
+
+sudo mysql -u root -p
+
+CREATE USER 'avinash'@'localhost' IDENTIFIED BY 'Avinash@123';
+
+GRANT ALL PRIVILEGES ON database_name.* TO 'avinash'@'localhost';
+
+GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT, REFERENCES, RELOAD on *.* TO 'avinash'@'localhost' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+Exit
+
+=====
+to met mysql use command:
+
+sudo mysql -u root -p
+username : avinash
+password : Avinash@123
+
+
