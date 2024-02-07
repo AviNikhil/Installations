@@ -1,0 +1,53 @@
+>>>>You can use various commands in Linux to see which ports are currently in use. Here are a few commonly used commands:
+
+1. netstat: This command displays network connections, routing tables, interface statistics, masquerade connections, and multicast memberships.
+   
+  
+   netstat -tuln
+   
+   
+   - `-t`: Displays TCP ports.
+   - `-u`: Displays UDP ports.
+   - `-l`: Shows listening ports.
+   - ' -p' -Display PID/Program name for sockets. In other words, this option tells who opened   the TCP or UDP port. For example, on my system, Nginx opened TCP port 80/443, so I will /usr/sbin/nginx or its PID.
+   - `-n`: Shows numerical addresses instead of resolving hostnames.
+
+=====================================================================
+2. ss : This is another utility to investigate sockets.
+   
+   
+   ss -tuln
+   
+
+   - `-t`: Displays TCP ports.
+   - `-u`: Displays UDP ports.
+   - `-l`: Shows listening ports.
+   - `-n`: Shows numerical addresses.
+
+==========================================================================
+3. lsof: Stands for "list open files". It can also list open network connections.
+   
+   ```bash
+   lsof -i -P -n | grep LISTEN
+   ```
+
+   - `-i`: Selects the listing of files any of whose Internet address matches the address specified in `inet`, `dgram`, `stream`, or `unix`.
+   - `-P`: Inhibits the conversion of port numbers to port names for network files. 
+   - `-n`: Shows numerical addresses.
+>>>>>>>>2nd syntax:
+
+sudo lsof -i -P -n
+sudo lsof -i -P -n | grep LISTEN
+doas lsof -i -P -n | grep LISTEN # OpenBSD #
+
+Consider the last line from above outputs:
+
+sshd    85379     root    3u  IPv4 0xffff80000039e000      0t0  TCP 10.86.128.138:  22 (LISTEN)
+
+    sshd is the name of the application.
+    10.86.128.138 is the IP address to which sshd application bind to (LISTEN)
+    22 is the TCP port that is being used (LISTEN)
+    85379 is the process ID of the sshd process
+
+
+These commands will show you which ports are currently being used and what processes are utilizing them.
