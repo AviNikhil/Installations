@@ -1,0 +1,54 @@
+>>>>>>>.TO INSTALL NODE EXPORTER>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Installing node_exporter
+
+First, we will download the Node Exporter on all machines :
+(Update: 6 Feb 2023), current prometheus version 1.7.0.
+
+########## INSTALL TAR FILE USING "wget" below or in official prometheus site:
+
+ >>>>>>>>>### for x64 arch (common server)wget
+https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.7.0.linux-amd64.tar.gz## or### for arm64 (raspi, etc)
+https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.7.0.linux-arm64.tar.gz
+
+##########Extract the downloaded archive
+
+>>>>>>>>>>tar -xf node_exporter-1.7.0.linux-amd64.tar.gz
+
+###########Move the node_exporter binary to /usr/local/bin:
+
+>>>>>>>>>>>sudo mv node_exporter-1.7.0.linux-amd64/node_exporter /usr/local/bin
+
+########Remove the residual files with:
+
+>>>>>>>>>>rm -r node_exporter-1.7.0.linux-amd64*
+
+Next,we will create users and service files for node_exporter.
+
+    For security reasons, it is always recommended to run any services/daemons in separate accounts of their own. Thus, we are going to create an user account for node_exporter. We have used the -r flag to indicate it is a system account, and set the default shell to /bin/false using -s to prevent logins.
+
+>>>>>>>>>>sudo useradd -rs /bin/false node_exporter
+
+Then, we will create a systemd unit file so that node_exporter can be started at boot. 
+>>>>>>>>> sudo nano /etc/systemd/system/node_exporter.service
+IN THIS NANO EDITOR , PASTE THE BELOW CONTENT IN EXPORTER SERVICE FILE:
+---------------
+[Unit]
+Description=Node Exporter
+After=network.target
+[Service]
+User=node_exporter
+Group=node_exporter
+Type=simple
+ExecStart=/usr/local/bin/node_exporter
+[Install]
+WantedBy=multi-user.target
+-----------------------------------
+>>>>>>NOW ADD PROMETHEUS CONFIGURATION IN PROMETHEUS.YML 
+AND THEN.....
+Since we have created a new unit file, we must reload the systemd daemon, set the service to always run at boot and start it :
+
+>>>>>>>sudo systemctl daemon-reload
+>>>>>>>sudo systemctl enable node_exporter
+>>>>>>>>sudo systemctl start node_exporter
+>>>>>>>>sudo systemctl status node_exporter
