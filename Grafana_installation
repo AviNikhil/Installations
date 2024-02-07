@@ -1,0 +1,96 @@
+
+>>>>IMPORETANT >>>The default login is "admin" / "admin".
+GRAFANA LOGIN DETAILS: USERNAME: admin PASSWORD: SYSTEM PASSWORD 
+
+
+Complete the following steps to install Grafana from the APT repository:
+
+1.1-->Install the prerequisite packages:
+    bash 
+
+>>>>>>>>sudo apt-get install -y apt-transport-https software-properties-common wget
+
+1.2-->Import the GPG key:
+bash
+
+>>>>>sudo mkdir -p /etc/apt/keyrings/
+>>>>>wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null
+
+1.3-->To add a repository for stable releases, run the following command:
+bash
+
+>>>>>>echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+
+1.4-->To add a repository for beta releases, run the following command:
+bash
+
+>>>>>>echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com beta main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+
+1.5-->Run the following command to update the list of available packages:
+bash
+
+# Updates the list of available packages
+>>>>>sudo apt-get update
+
+1.6-->To install Grafana OSS, run the following command:
+bash
+
+# Installs the latest OSS release:
+>>>>>>sudo apt-get install grafana
+
+<<<<optional to install enterprise version>>>To install Grafana Enterprise, run the following command:
+bash
+
+    # Installs the latest Enterprise release:
+    sudo apt-get install grafana-enterprise
+
+Install Grafana using a deb package or as a standalone binary
+
+If you choose not to install Grafana using APT, you can download and install Grafana using the deb package or as a standalone binary.
+
+Complete the following steps to install Grafana using DEB or the standalone binaries:
+
+    Navigate to the Grafana download page.
+    Select the Grafana version you want to install.
+        The most recent Grafana version is selected by default.
+        The Version field displays only tagged releases. If you want to install a nightly build, click Nightly Builds and then select a version.
+    Select an Edition.
+        Enterprise: This is the recommended version. It is functionally identical to the open source version, but includes features you can unlock with a license, if you so choose.
+        Open Source: This version is functionally identical to the Enterprise version, but you will need to download the Enterprise version if you want Enterprise features.
+    Depending on which system you are running, click the Linux or ARM tab on the download page.
+    Copy and paste the code from the download page into your command line and run.
+========================================================
+>>>>>>>>>>>>>Uninstall on Debian or Ubuntu
+
+Complete any of the following steps to uninstall Grafana.
+
+To uninstall Grafana, run the following commands in a terminal window:
+
+    If you configured Grafana to run with systemd, stop the systemd servivce for Grafana server:
+    shell 
+
+>>>>>>>>>>>>>sudo systemctl stop grafana-server
+
+If you configured Grafana to run with init.d, stop the init.d service for Grafana server:
+shell
+
+>>>>>>>>>>>>>>sudo service grafana-server stop
+
+.......To uninstall Grafana OSS:
+shell
+
+>>>>>>>>>>>>>sudo apt-get remove grafana
+
+To uninstall Grafana Enterprise:
+shell
+
+sudo apt-get remove grafana-enterprise
+
+Optional: To remove the Grafana repository:
+bash
+
+sudo rm -i /etc/apt/sources.list.d/grafana.list
+
+
+==========================================================================
+REFERENCE SITE: https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
