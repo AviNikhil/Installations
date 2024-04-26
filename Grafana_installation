@@ -94,3 +94,10 @@ sudo rm -i /etc/apt/sources.list.d/grafana.list
 
 ==========================================================================
 REFERENCE SITE: https://grafana.com/docs/grafana/latest/setup-grafana/installation/debian/
+
+=========================================================================================================
+if user want to change the port to number of grafana from 3000 to other, one need to change
+>>>>>>/etc/grafana/grafana.ini you have to change in
+>>>>>>/usr/share/grafana/conf/defaults.ini 
+>>>>>> /usr/share/grafana/conf/sample.ini files.
+Just search 3000 port(which is default port for grafana) in these three files and replace it with your preferred port. 
